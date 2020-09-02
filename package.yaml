@@ -21,7 +21,7 @@ library:
     - req >= 3.2 && < 4.0
 
 executables:
-  Neopolitan-exe:
+  neo:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
@@ -41,3 +41,4 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - Neopolitan
+    - base >= 4.9

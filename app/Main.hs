@@ -1,6 +1,16 @@
 module Main where
 
-import Lib
+import           Lib
+
+
+newtype Hook = Hook String
+
+
+readHook :: FilePath -> IO Hook
+readHook filename = Hook . filter (/= '\n') <$> readFile filename
+
 
 main :: IO ()
-main = someFunc
+main = do
+  Hook hook <- readHook "hook"
+  putStrLn hook
