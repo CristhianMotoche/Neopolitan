@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: edce789f4c6d53f69ab9f35e36cf3cf481f3dd1854190331996ab8812591c95f
+-- hash: 74cbdf3b0bce09c691239cf6723aeef4ee8634d5ee0704ec98aa621ef75f2eed
 
 name:           Neopolitan
 version:        0.1.0.0
@@ -27,7 +27,8 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
+      Neo
+      Neo.Config
   other-modules:
       Paths_Neopolitan
   hs-source-dirs:

@@ -1,16 +1,8 @@
 module Main where
 
-import           Lib
-
-
-newtype Hook = Hook String
-
-
-readHook :: FilePath -> IO Hook
-readHook filename = Hook . filter (/= '\n') <$> readFile filename
-
+import           Neo
 
 main :: IO ()
 main = do
-  Hook hook <- readHook "hook"
-  putStrLn hook
+  config <- Neo.readConfig
+  putStrLn "..."
