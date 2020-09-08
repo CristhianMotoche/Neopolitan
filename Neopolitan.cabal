@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 74cbdf3b0bce09c691239cf6723aeef4ee8634d5ee0704ec98aa621ef75f2eed
+-- hash: 5abbafc42c31c4147426245b7d7917a19d8ef8d9cee280285d21f3a1d9ea76ca
 
 name:           Neopolitan
 version:        0.1.0.0
@@ -29,13 +29,16 @@ library
   exposed-modules:
       Neo
       Neo.Config
+      Neo.Slack
   other-modules:
       Paths_Neopolitan
   hs-source-dirs:
       src
   build-depends:
       base >=4.7 && <5
-    , req >=3.2 && <4.0
+    , bytestring
+    , http-client >=0.6.4 && <0.7
+    , http-client-tls >=0.3 && <0.4
   default-language: Haskell2010
 
 executable neo

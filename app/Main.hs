@@ -1,8 +1,13 @@
 module Main where
 
+import           System.Environment (getArgs)
+
 import           Neo
 
 main :: IO ()
 main = do
   config <- Neo.readConfig
-  putStrLn "..."
+  args <- getArgs
+  resp <- Neo.updateStatus
+  print resp
+  return ()

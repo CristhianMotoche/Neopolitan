@@ -18,7 +18,9 @@ dependencies:
 library:
   source-dirs: src
   dependencies:
-    - req >= 3.2 && < 4.0
+    - http-client >= 0.6.4 && < 0.7
+    - http-client-tls >= 0.3 && < 0.4
+    - bytestring
 
 executables:
   neo:
