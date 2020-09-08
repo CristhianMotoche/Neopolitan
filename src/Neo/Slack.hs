@@ -22,6 +22,4 @@ endpoint = "https://api.slack.com/api/users.profile.set"
 
 
 updateStatus :: IO (Response LB.ByteString)
-updateStatus = do
-  manager <- TLS.newTlsManager
-  httpLbs endpoint manager
+updateStatus = TLS.newTlsManager >>= httpLbs endpoint
