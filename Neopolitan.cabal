@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 5abbafc42c31c4147426245b7d7917a19d8ef8d9cee280285d21f3a1d9ea76ca
+-- hash: 08d8bce0bc8fc1d0d045cd077260072d3d4a97399a9180bcc0498b578a5cbcd8
 
 name:           Neopolitan
 version:        0.1.0.0
@@ -35,7 +35,8 @@ library
   hs-source-dirs:
       src
   build-depends:
-      base >=4.7 && <5
+      aeson >=1.4 && <1.5
+    , base >=4.7 && <5
     , bytestring
     , http-client >=0.6.4 && <0.7
     , http-client-tls >=0.3 && <0.4
