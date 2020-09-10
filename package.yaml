@@ -45,3 +45,4 @@ tests:
     dependencies:
     - Neopolitan
     - base >= 4.9
+    - tasty >= 1.2 && < 1.3

@@ -1,4 +1,4 @@
-module Neo (readConfig, updateStatus) where
+module Neo (Status(..), readConfig, updateStatus) where
 
 import           Neo.Config
 import           Neo.Slack
