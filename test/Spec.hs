@@ -27,6 +27,7 @@ tests = testGroup "Status"
                  }
         codification = toStrict1 $ encode fooStatus
      in do
+        "\"profile\":" `B.isInfixOf` codification @? "Contains profile"
         "\"status_text\":\"Foo\"" `B.isInfixOf` codification @? "Contains text key"
         "\"status_emoji\":\":bar:\"" `B.isInfixOf` codification @? "Contains emoji key"
         "\"status_expiration\":0" `B.isInfixOf` codification @? "Contains expiration key"

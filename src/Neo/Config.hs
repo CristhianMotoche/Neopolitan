@@ -1,4 +1,4 @@
-module Neo.Config (Config, readConfig) where
+module Neo.Config (Config(..), readConfig) where
 
 
 import           System.Environment (getEnv)

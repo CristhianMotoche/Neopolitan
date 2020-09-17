@@ -19,9 +19,9 @@ library:
   source-dirs: src
   dependencies:
     - aeson >= 1.4 && < 1.5
+    - bytestring
     - http-client >= 0.6.4 && < 0.7
     - http-client-tls >= 0.3 && < 0.4
-    - bytestring
 
 executables:
   neo:
@@ -44,5 +44,8 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - Neopolitan
+    - aeson
     - base >= 4.9
+    - bytestring
     - tasty >= 1.2 && < 1.3
+    - tasty-hunit >= 0.10 && < 0.11

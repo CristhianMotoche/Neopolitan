@@ -4,9 +4,12 @@
 module Neo.Slack (Status(..), updateStatus) where
 
 import qualified Data.Aeson              as A
+import qualified Data.ByteString.Char8   as B
 import qualified Data.ByteString.Lazy    as LB
 import           Network.HTTP.Client
 import qualified Network.HTTP.Client.TLS as TLS
+
+import           Neo.Config              (Config (..))
 
 
 data Status = Status
@@ -18,25 +21,30 @@ data Status = Status
 
 instance A.ToJSON Status where
   toJSON (Status {..}) = A.object [
-      "status_text" A..= text
-    , "status_emoji" A..= emoji
-    , "status_expiration" A..= expiration
+    "profile" A..= A.object [
+        "status_text" A..= text
+        , "status_emoji" A..= emoji
+        , "status_expiration" A..= expiration
+        ]
     ]
 
 
-endpoint :: Status -> Request
-endpoint status = "https://api.slack.com/api/users.profile.set"
+endpoint :: Config -> Status -> Request
+endpoint (Config token) status = "https://api.slack.com/api/users.profile.set"
   { method = "POST"
   , secure = True
   , requestBody = RequestBodyLBS $ A.encode status
-  , requestHeaders = [("Content-type", "application/json; charset=utf-8")]
+  , requestHeaders = [
+      ("Content-type", "application/json; charset=utf-8"),
+      ("Authorization", "Bearer " <> B.pack token)
+    ]
   }
 
 
-updateStatus :: Status -> IO (Response (Maybe A.Value))
-updateStatus status = do
+updateStatus :: Config -> Status -> IO (Response (Maybe A.Value))
+updateStatus config status = do
   man <- TLS.newTlsManager
-  resp <- httpLbs (endpoint status) man
+  resp <- httpLbs (endpoint config status) man
   return $ resp {
     responseBody = A.decode $ responseBody resp
   }
