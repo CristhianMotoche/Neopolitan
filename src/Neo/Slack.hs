@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards   #-}
 
-module Neo.Slack (Status(..), updateStatus) where
+module Neo.Slack (Status(..), StatusResponse(..), updateStatus) where
 
 import qualified Data.Aeson              as A
 import qualified Data.ByteString.Char8   as B
@@ -11,6 +11,17 @@ import qualified Network.HTTP.Client.TLS as TLS
 
 import           Neo.Config              (Config (..))
 
+
+
+data StatusResponse = StatusResponse
+    { ok     :: Bool
+    , status :: Maybe Status
+    }
+
+instance A.FromJSON StatusResponse where
+  parseJSON (A.Object v) =
+    StatusResponse <$> v A..: "ok" <*> pure Nothing
+  parseJSON _ = error "Failed at parsing Status"
 
 data Status = Status
     { text       :: String
@@ -41,10 +52,8 @@ endpoint (Config token) status = "https://api.slack.com/api/users.profile.set"
   }
 
 
-updateStatus :: Config -> Status -> IO (Response (Maybe A.Value))
+updateStatus :: Config -> Status -> IO (Maybe StatusResponse)
 updateStatus config status = do
   man <- TLS.newTlsManager
   resp <- httpLbs (endpoint config status) man
-  return $ resp {
-    responseBody = A.decode $ responseBody resp
-  }
+  return $ A.decode $ responseBody resp

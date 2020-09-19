@@ -2,7 +2,8 @@ module Main where
 
 import           System.Environment (getArgs)
 
-import           Neo                (Status (..), readConfig, updateStatus)
+import           Neo                (Status (..), StatusResponse (..),
+                                     readConfig, updateStatus)
 
 
 lunch :: Status
@@ -16,6 +17,10 @@ main :: IO ()
 main = do
   config <- readConfig
   args <- getArgs
-  resp <- updateStatus config lunch
-  print resp
-  return ()
+  resp' <- updateStatus config lunch
+  case resp' of
+    Nothing -> putStrLn "Error parsing"
+    Just resp ->
+      if ok resp
+         then putStrLn "Status updated"
+         else putStrLn "Nope!"
