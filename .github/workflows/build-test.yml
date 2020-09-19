@@ -21,7 +21,10 @@ jobs:
           path:
             - ~/.stack
             - .stack-work
-          key: stack-build-${{ hashFiles('stack.yaml.lock', 'Neopolitan.cabal') }}
+          key: stack-build-${{ hashFiles('Neopolitan.cabal') }}-${{ hashFiles('stack.yaml.lock') }}
+          restore-keys:
+            - stack-build-${{ hashFiles('Neopolitan.cabal') }}-
+            - stack-build-
 
       - name: Install dependencies
         run: stack build --test --only-dependencies
