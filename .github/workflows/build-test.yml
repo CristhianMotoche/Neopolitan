@@ -18,9 +18,9 @@ jobs:
       - name: Cache
         uses: actions/cache@v2
         with:
-          path:
-            - ~/.stack
-            - .stack-work
+          path: |
+            ~/.stack
+            .stack-work
           key: stack-build-${{ hashFiles('Neopolitan.cabal') }}-${{ hashFiles('stack.yaml.lock') }}
           restore-keys:
             - stack-build-${{ hashFiles('Neopolitan.cabal') }}-
