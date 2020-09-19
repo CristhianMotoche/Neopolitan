@@ -8,9 +8,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Add GHC
+      - name: Use stack
         uses: actions/setup-haskell@v1.1
         with:
           enable-stack: true
           stack-version: 'latest'
-     - run: stack test
+      - run: stack test
